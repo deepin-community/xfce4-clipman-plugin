@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs -Wl,--as-needed -Wl,-O1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --disable-static --disable-silent-rules
+
+override_dh_auto_install:
+	dh_auto_install
+	-rm debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/xfce4/panel/plugins/*.la

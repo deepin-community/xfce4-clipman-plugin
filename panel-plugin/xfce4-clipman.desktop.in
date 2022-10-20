@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+_Name=Clipboard Manager
+_Comment=Clipboard Manager Autostart File
+TryExec=xfce4-clipman
+Exec=xfce4-clipman
+Icon=xfce4-clipman-plugin
+Terminal=false
+Categories=GTK;Utility;TrayIcon;
+OnlyShowIn=XFCE;GNOME;X-Cinnamon;
+StartupNotify=false

@@ -1,0 +1,10 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Clipman
+_Comment=Clipboard manager
+Icon=xfce4-clipman-plugin
+X-XFCE-Module=clipman
+X-XFCE-Internal=false
+X-XFCE-Unique=true
+X-XFCE-API=2.0
