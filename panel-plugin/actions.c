@@ -385,12 +385,26 @@ cb_file_changed (ClipmanActions *actions,
                  GFile *other_file,
                  GFileMonitorEvent event_type)
 {
-  static guint timeout = 0;
+  static GSource *source = NULL;
+  guint           source_id;
+
   if (event_type == G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT)
     {
-      if (timeout > 0)
-        g_source_remove (timeout);
-      timeout = g_timeout_add_seconds (1, timeout_file_changed, actions);
+      /* drop the previous timer source */
+      if (source != NULL)
+        {
+          if (! g_source_is_destroyed (source))
+            g_source_destroy (source);
+
+          g_source_unref (source);
+          source = NULL;
+        }
+
+      source_id = g_timeout_add_seconds (1, (GSourceFunc)timeout_file_changed, actions);
+
+      /* retrieve the timer source and increase its ref count to test its destruction next time */
+      source = g_main_context_find_source_by_id (NULL, source_id);
+      g_source_ref (source);
     }
 }
 
@@ -473,9 +487,9 @@ clipman_actions_add (ClipmanActions *actions,
   GRegex *_regex;
   gchar *regex_anchored;
 
-  g_return_val_if_fail (G_LIKELY (action_name != NULL), FALSE);
-  g_return_val_if_fail (G_LIKELY (command_name != NULL), FALSE);
-  g_return_val_if_fail (G_LIKELY (command != NULL), FALSE);
+  g_return_val_if_fail (action_name != NULL, FALSE);
+  g_return_val_if_fail (command_name != NULL, FALSE);
+  g_return_val_if_fail (command != NULL, FALSE);
 
   l = g_slist_find_custom (actions->priv->entries, action_name, (GCompareFunc)__clipman_actions_entry_compare_name);
 
@@ -691,6 +705,7 @@ clipman_actions_match_with_menu (ClipmanActions *actions,
   GdkDevice *device = gdk_seat_get_pointer (seat);
   GdkScreen* screen = gdk_screen_get_default ();
   GdkWindow * root_win = gdk_screen_get_root_window (screen);
+  GdkEvent *event;
 
   if (group == ACTION_GROUP_SELECTION)
     {
@@ -764,10 +779,12 @@ clipman_actions_match_with_menu (ClipmanActions *actions,
     gtk_grab_add(actions->priv->menu);
   }
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  gtk_menu_popup (GTK_MENU (actions->priv->menu), NULL, NULL, NULL, NULL, 0, gtk_get_current_event_time ());
-G_GNUC_END_IGNORE_DEPRECATIONS
+  event = gdk_event_new (GDK_BUTTON_PRESS);
+  event->button.window = g_object_ref (root_win);
+  gdk_event_set_device (event, device);
+  gtk_menu_popup_at_pointer (GTK_MENU (actions->priv->menu), event);
 
+  gdk_event_free (event);
   g_slist_free (entries);
 }
 
@@ -924,8 +941,6 @@ static void
 clipman_actions_class_init (ClipmanActionsClass *klass)
 {
   GObjectClass *object_class;
-
-  clipman_actions_parent_class = g_type_class_peek_parent (klass);
 
   object_class = G_OBJECT_CLASS (klass);
   object_class->finalize = clipman_actions_finalize;

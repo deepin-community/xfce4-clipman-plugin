@@ -1,3 +1,42 @@
+xfce4-clipman-plugin (2:1.6.6-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 1.6.6.
+  * Update Standards-Version to 4.7.0.
+  * d/control: Update B-D, pkg-config → pkgconf.
+
+ -- Unit 193 <unit193@debian.org>  Sat, 04 May 2024 01:40:06 -0400
+
+xfce4-clipman-plugin (2:1.6.5-1) unstable; urgency=medium
+
+  * New upstream version 1.6.5
+  * d/control: unmark the plugin as M-A:same
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Sun, 01 Oct 2023 23:29:41 +0200
+
+xfce4-clipman-plugin (2:1.6.4-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 1.6.4.
+
+ -- Unit 193 <unit193@debian.org>  Wed, 09 Aug 2023 19:34:10 -0400
+
+xfce4-clipman-plugin (2:1.6.3-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Akbarkhon Variskhanov ]
+  * Drop --as-needed from LDFLAGS
+  * List docs to install in xfce4-clipman.docs
+  * d/rules: Use execute_after instead of overriding dh_auto_install
+
+  [ Unit 193 ]
+  * New upstream version 1.6.3.
+  * d/rules: Opt-out of trimmed changelogs.
+  * Update Standards-Version to 4.6.2.
+
+ -- Unit 193 <unit193@debian.org>  Fri, 16 Jun 2023 02:18:36 -0400
+
 xfce4-clipman-plugin (2:1.6.2-1) unstable; urgency=medium
 
   * Team upload.

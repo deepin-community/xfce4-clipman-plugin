@@ -15,10 +15,10 @@ Build-Depends: debhelper-compat (= 13),
                libxfconf-0-dev,
                libxml2-dev,
                libxtst-dev,
-               pkg-config,
+               pkgconf,
                xfce4-dev-tools
 Rules-Requires-Root: no
-Standards-Version: 4.5.1
+Standards-Version: 4.7.0
 Homepage: https://docs.xfce.org/panel-plugins/xfce4-clipman-plugin
 Vcs-Git: https://salsa.debian.org/xfce-team/goodies/xfce4-clipman-plugin.git
 Vcs-Browser: https://salsa.debian.org/xfce-team/goodies/xfce4-clipman-plugin
@@ -37,7 +37,6 @@ Description: clipboard history utility
 Package: xfce4-clipman-plugin
 Architecture: any
 Depends: xfce4-clipman, ${misc:Depends}, ${shlibs:Depends}
-Multi-Arch: same
 Description: clipboard history plugin for Xfce panel
  Clipman enables you to store and recall X selections, as well as GTK+
  clipboard content. You can also define actions to be triggered by selecting
