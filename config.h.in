@@ -6,52 +6,59 @@
 /* Define for tracing support */
 #undef DEBUG_TRACE
 
-/* always defined to indicate that i18n is enabled */
-#undef ENABLE_NLS
+/* Define if m4_default(the Wayland windowing system, wayland) is enabled */
+#undef ENABLE_WAYLAND
+
+/* Define if m4_default(the X11 windowing system, x11) is enabled */
+#undef ENABLE_X11
 
 /* Name of default gettext domain */
 #undef GETTEXT_PACKAGE
 
-/* Define to 1 if you have the `bind_textdomain_codeset' function. */
+/* Prevent post 2_60 APIs */
+#undef GLIB_VERSION_MAX_ALLOWED
+
+/* Ignore post 2_60 APIs */
+#undef GLIB_VERSION_MIN_REQUIRED
+
+/* Use GLib structured logging */
+#undef G_LOG_USE_STRUCTURED
+
+/* Define to 1 if you have the 'bind_textdomain_codeset' function. */
 #undef HAVE_BIND_TEXTDOMAIN_CODESET
-
-/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
-   CoreFoundation framework. */
-#undef HAVE_CFLOCALECOPYCURRENT
-
-/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
-   the CoreFoundation framework. */
-#undef HAVE_CFPREFERENCESCOPYAPPVALUE
-
-/* Define to 1 if you have the `dcgettext' function. */
-#undef HAVE_DCGETTEXT
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
-/* Define if the GNU gettext() function is already present or preinstalled. */
-#undef HAVE_GETTEXT
+/* Define if gdk-wayland-3.0 >= gtk_min_version present */
+#undef HAVE_GDK_WAYLAND
+
+/* Define if gdk-x11-3.0 >= gtk_min_version present */
+#undef HAVE_GDK_X11
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define if your <locale.h> file defines LC_MESSAGES. */
-#undef HAVE_LC_MESSAGES
-
-/* Define if libX11 is available */
+/* Define if x11 >= libx11_min_version present */
 #undef HAVE_LIBX11
+
+/* Define if xproto >= libxproto_min_version present */
+#undef HAVE_LIBXPROTO
+
+/* Define if xtst >= libxtst_min_version present */
+#undef HAVE_LIBXTST
 
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
 
-/* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
-
-/* Define if libqrencode >= 3.3.0 present */
+/* Define if libqrencode >= libqrencode_min_version present */
 #undef HAVE_QRENCODE
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdio.h> header file. */
+#undef HAVE_STDIO_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
@@ -70,6 +77,12 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
+
+/* Define if wayland-client >= wayland_min_version present */
+#undef HAVE_WAYLAND_CLIENT
+
+/* Define if wayland-scanner >= wayland_min_version present */
+#undef HAVE_WAYLAND_SCANNER
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
@@ -95,11 +108,10 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define to 1 if you have the ANSI C header files. */
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
 
 /* Version number of package */
 #undef VERSION
-
-/* Define to 1 if the X Window System is missing or not being used. */
-#undef X_DISPLAY_MISSING
